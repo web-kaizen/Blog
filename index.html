@@ -20,7 +20,7 @@
     <link rel="icon" type="image/png" href="/images/favicon.png?1" sizes="16x16">
     <link rel="icon" type="image/png" href="/images/favicon_2x.png?1" sizes="32x32">
     <link href="assets/css/quill.core.min.css" rel="stylesheet">
-    <link href="assets/css/core.min.css?47" rel="stylesheet">
+    <link href="assets/css/core.min.css" rel="stylesheet">
   </head>
 <body cz-shortcut-listen="true">
     <div class="tl_page_wrap">
@@ -53,8 +53,8 @@
             </div>
           </div><div id="_tl_blocks" class="tl_blocks" style="top: 60px;">
             <div class="buttons">
-              <button id="_image_button"></button><!--
-           --><button id="_embed_button"></button>
+              <button id="_image_button" onclick="imageButton();"></button><!--
+           --><button id="_embed_button" onclick="embedButton();"></button>
             </div>
           </div><input type="file" accept="image/gif, image/jpeg, image/jpg, image/png, video/mp4" class="ql-image" data-status="busy"><input type="file" accept="image/gif, image/jpeg, image/jpg, image/png, video/mp4" class="ql-image" data-status="busy"><input type="file" accept="image/gif, image/jpeg, image/jpg, image/png, video/mp4" class="ql-image" data-status="busy"></article>
           
@@ -74,6 +74,54 @@
     
     
     <script>var T={"apiUrl":"https:\/\/edit.telegra.ph","datetime":0,"pageId":0,"editable":true};(function(){var b=document.querySelector('time');if(b&&T.datetime){var a=new Date(1E3*T.datetime),d='January February March April May June July August September October November December'.split(' ')[a.getMonth()],c=a.getDate();b.innerText=d+' '+(10>c?'0':'')+c+', '+a.getFullYear()}})();</script>
+    <script type="text/javascript">var imageButton = function() { // add script
+    var t = quill.container.querySelector("input.ql-image[type=file][data-status=ready]");
+    null == t && (t = document.createElement("input"),
+    t.setAttribute("type", "file"),
+    t.setAttribute("accept", browser.safari_mobile ? "image/gif, image/jpeg, image/jpg, image/png" : "image/gif, image/jpeg, image/jpg, image/png, video/mp4"),
+    t.classList.add("ql-image"),
+    t.addEventListener("change", function() {
+        if (null != t.files && null != t.files[0]) {
+            var e = t.files[0];
+            updatePhoto(e, function(e) {
+                if (quill.fileSizeLimit && e.size > quill.fileSizeLimit)
+                    return quill.fileSizeLimitCallback && quill.fileSizeLimitCallback();
+                var o = new FileReader;
+                o.onload = function(e) {
+                    var o = getFigureValueByUrl(e.target.result);
+                    if (o) {
+                        var l = quill.getSelection(!0);
+                        quill.updateContents((new Delta).retain(l.index)["delete"](l.length).insert({
+                            blockFigure: o
+                        }), Quill.sources.USER)
+                    } else
+                        showError("Invalid file format");
+                    t.value = "",
+                    t.setAttribute("data-status", "ready")
+                }
+                ,
+                o.readAsDataURL(e)
+            })
+        }
+    }),
+    quill.container.appendChild(t)),
+    t.setAttribute("data-status", "busy"),
+    t.click()
+}   </script>
+<script type="text/javascript"> // add script
+  var embedButton = function(t) {
+    var e = quill.getSelection(!0)
+      , o = quill.scroll.line(e.index)
+      , l = _slicedToArray(o, 1)
+      , r = l[0];
+    if (r) {
+        var i = $(r.domNode).text();
+        i || (r.domNode.setAttribute("data-placeholder", "Paste a YouTube, Vimeo or Twitter link, and press Enter"),
+        $(r.domNode).addClass("placeholder_once empty"),
+        hideBlocksTooltip())
+    }
+}
+</script>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/jquery.selection.min.js"></script>
     <script src="assets/js/autosize.min.js"></script>

@@ -11,6 +11,8 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_DB_PASSWORD}
     ports:
       - "${POSTGRES_DB_PORT}:5432"
+    networks:
+      - backend
     volumes:
       - data:/var/lib/postgresql/data
 

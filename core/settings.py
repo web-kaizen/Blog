@@ -12,38 +12,15 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 
 
-import os
 from pathlib import Path
 from dotenv import load_dotenv
 
-import environ
+import os
 
 load_dotenv()
 
-env = environ.Env(
-    DEBUG=bool,
-    SECRET_KEY=str,
-    NEED_LOGGER=bool,
+env = os.environ
 
-    # Core
-    APP_ID=str,
-    THIRD_PARTY_APP_URL=str,
-
-    # Redis
-    REDIS_HOST=str,
-    REDIS_PORT=int,
-    CACHE_DEFAULT_TTL=int,
-
-    # Postgres
-    POSTGRES_DB_NAME=str,
-    POSTGRES_DB_USER=str,
-    POSTGRES_DB_PASSWORD=str,
-    POSTGRES_DB_HOST=str,
-    POSTGRES_DB_PORT=int,
-    LOCALHOST=str,
-    ALLOWED_HOSTS=str,
-    INTERNAL_IPS=str
-)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -53,15 +30,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = env['SECRET_KEY']
 # SECRET_KEY = 'django-insecure-j021i7o-)w$0jb7@vls7^$*7@*gl0pr!h4i3^eds$v$500t25s'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env('DEBUG')
+DEBUG = env['DEBUG']
 
-LOCALHOST = env('LOCALHOST')
+LOCALHOST = env['LOCALHOST']
 BASE_URI = "/api/v0"
-ALLOWED_HOSTS = env("ALLOWED_HOSTS").split(', ')
+ALLOWED_HOSTS = env["ALLOWED_HOSTS"].split(', ')
 
 # Application definition
 
@@ -73,10 +50,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "rest_framework",
-    'rest_framework_swagger',
-    'drf_yasg',
+    # 'rest_framework_swagger',
+    # 'drf_yasg',
     "core",
     "services",
+    "front",
 ]
 
 MIDDLEWARE = [
@@ -113,28 +91,30 @@ TEMPLATES = [
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': env("POSTGRES_DB_NAME"),
-        'USER': env("POSTGRES_DB_USER"),
-        'PASSWORD': env("POSTGRES_DB_PASSWORD"),
-        'HOST': env("POSTGRES_DB_HOST"),
-        'PORT': env("POSTGRES_DB_PORT"),
+        'NAME': env["POSTGRES_DB_NAME"],
+        'USER': env["POSTGRES_DB_USER"],
+        'PASSWORD': env["POSTGRES_DB_PASSWORD"],
+        'HOST': env["POSTGRES_DB_HOST"],
+        'PORT': env["POSTGRES_DB_PORT"],
     }
 }
 # Logger
-NEED_LOGGER = env("NEED_LOGGER")
+NEED_LOGGER = env["NEED_LOGGER"]
 
 # Internal IPS
-INTERNAL_IPS = env("INTERNAL_IPS").split(", ")
+INTERNAL_IPS = env["INTERNAL_IPS"].split(", ")
 
 # Yadro
-APP_ID = env('APP_ID')
-THIRD_PARTY_APP_URL = env('THIRD_PARTY_APP_URL')
+APP_ID = env['APP_ID']
+THIRD_PARTY_APP_URL = env['THIRD_PARTY_APP_URL']
+THIRD_PARTY_APP_URL_TELEGRAPH = env['THIRD_PARTY_APP_URL_TELEGRAPH']
+THIRD_PARTY_APP_URL_TELEGRAPH_API = env['THIRD_PARTY_APP_URL_TELEGRAPH_API']
 
 
 # Redis
-REDIS_HOST = env('REDIS_HOST')
-REDIS_PORT = env('REDIS_PORT')
-CACHE_DEFAULT_TTL = env('CACHE_DEFAULT_TTL')
+REDIS_HOST = env['REDIS_HOST']
+REDIS_PORT = env['REDIS_PORT']
+CACHE_DEFAULT_TTL = env['CACHE_DEFAULT_TTL']
 
 # Cache
 CACHES = {
@@ -180,9 +160,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
-CORS_ALLOWED_ORIGINS = env("CORS_ALLOWED_ORIGINS").split(", ")
+STATICFILES_DIRS = [
+   os.path.join(BASE_DIR, "static"),
+]
+
+CORS_ALLOWED_ORIGINS = env["CORS_ALLOWED_ORIGINS"].split(", ")
 
 CORS_ORIGIN_ALLOW_ALL = True
 # Default primary key field type

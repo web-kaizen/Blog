@@ -14,7 +14,8 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from services import BotList, BotDetail, Register, Login, Logout, EmailVerificationCheck, EmailVerificationResend, EmailVerificationVerify
+
+from services import BotList, BotDetail, Register, Login, Logout, EmailVerificationCheck, EmailVerificationResend, EmailVerificationVerify, TelegraphCheck, TelegraphIndex
 from django.urls import path
 from django.contrib import admin
 from services.base import MessageBase, DialogueBase, DialogueIdBase
@@ -32,4 +33,6 @@ urlpatterns = [
     path("api/v0/dialogues/", DialogueBase.DialogueBase().as_view()),
     path("api/v0/dialogues/<int:dialogue_id>/", DialogueIdBase.DialogueIdBase().as_view()),
     path("api/v0/dialogues/<int:dialogue_id>/messages/", MessageBase.MessageBase.as_view()),
+    path("api/v0/telegraph/check/", TelegraphCheck.TelegraphCheck.as_view()),
+    path("api/v0/telegraph/index/", TelegraphIndex.TelegraphIndex.as_view()),
 ]

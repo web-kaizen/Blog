@@ -9,9 +9,10 @@ class Methods:
         self.set_method(self.get_method())
         if self.get_method() == "GET" and request.query_params:
             query_params = '?' + '&'.join([f"{key}={value}" for key, value in request.query_params.items()])
-            self.set_url(f'{self._THIRD_PARTY_APP_URL}{APP_ID}{self.get_path()}{query_params}')
+            self.set_url(f'{self._THIRD_PARTY_APP_URL}{self.get_path()}{query_params}')
         else:
-            self.set_url(f'{self._THIRD_PARTY_APP_URL}{APP_ID}{self.get_path()}')
+            self.set_url(f'{self._THIRD_PARTY_APP_URL}{self.get_path()}')
+            print(self.get_url())
 
         self.set_headers(dict(request.headers))
         self.set_request(request.data)

@@ -114,6 +114,8 @@ class Route(Methods):
         return response
 
     def send(self) -> tuple:
+        print(self.get_headers())
+        print(self.get_request())
         response = requests.request(
             method=self.get_method(),
             url=self.get_url(),

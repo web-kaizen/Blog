@@ -1,6 +1,5 @@
 from django.http import HttpResponse
 from rest_framework.response import Response
-from .settings import APP_ID
 
 
 class Methods:

@@ -1,14 +1,13 @@
 import inspect
 import requests
 from requests import JSONDecodeError
-from .settings import APP_ID, THIRD_PARTY_APP_URL, LOCALHOST, BASE_URI
-from .Methods import Methods
+from core.settings import TELEGRAPH_URL
+from core.Methods import Methods
 
 
 class Route(Methods):
     def __init__(self, need_execute_local=False, *args, **kwargs):
-        self._APP_ID = APP_ID
-        self._THIRD_PARTY_APP_URL = THIRD_PARTY_APP_URL
+        self._THIRD_PARTY_APP_URL = TELEGRAPH_URL
         self._method: str | None = None
         self._request: dict | None = None
         self._response: dict | None = None
@@ -21,7 +20,7 @@ class Route(Methods):
         if need_execute_local:
             request = requests.Request(
                 method=self.get_method(),
-                url=f"{self._THIRD_PARTY_APP_URL}{self._APP_ID}{self.get_path()}",
+                url=f"{self._THIRD_PARTY_APP_URL}{self.get_path()}",
             )
             other_params: list = ["data", "query_params", "json", "headers"]
             for param in other_params:

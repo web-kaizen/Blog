@@ -1,7 +1,7 @@
 import requests
 
 from core.Route import Route
-from core.settings import THIRD_PARTY_APP_URL_TELEGRAPH
+from core.settings import TELEGRAPH_URL
 
 
 class CustomRoute(Route):
@@ -18,16 +18,16 @@ class CustomRoute(Route):
 
 class TelegraphEditRoute(Route):
     def __init__(self, need_execute_local=False, *args, **kwargs):
-        self._THIRD_PARTY_APP_URL_TELEGRAPH = THIRD_PARTY_APP_URL_TELEGRAPH
+        self.TELEGRAPH_URL = TELEGRAPH_URL
         super().__init__(self, *args, **kwargs)
 
     def request_setter(self, request, *args, **kwargs):
         self.set_method(self.get_method())
         if self.get_method() == "GET" and request.query_params:
             query_params = '?' + '&'.join([f"{key}={value}" for key, value in request.query_params.items()])
-            self.set_url(f'{self._THIRD_PARTY_APP_URL_TELEGRAPH}{self.get_path()}{query_params}')
+            self.set_url(f'{self.TELEGRAPH_URL}{self.get_path()}{query_params}')
         else:
-            self.set_url(f'{self._THIRD_PARTY_APP_URL_TELEGRAPH}{self.get_path()}')
+            self.set_url(f'{self.TELEGRAPH_URL}{self.get_path()}')
 
         self.set_headers({
             'Origin': 'https://telegra.ph',

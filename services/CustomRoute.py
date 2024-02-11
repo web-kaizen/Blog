@@ -2,7 +2,7 @@ import requests
 import uuid
 
 from core.Route import Route
-from core.settings import THIRD_PARTY_APP_URL_TELEGRAPH, THIRD_PARTY_APP_URL_TELEGRAPH_API
+from core.settings import THIRD_PARTY_APP_URL_TELEGRAPH
 
 
 class CustomRoute(Route):
@@ -18,10 +18,8 @@ class CustomRoute(Route):
 
 
 class TelegraphEditRoute(Route):
-    _cookie = {}
     def __init__(self, need_execute_local=False, *args, **kwargs):
         self._THIRD_PARTY_APP_URL_TELEGRAPH = THIRD_PARTY_APP_URL_TELEGRAPH
-        self._THIRD_PARTY_APP_URL_TELEGRAPH_API = THIRD_PARTY_APP_URL_TELEGRAPH_API
         super().__init__(self, *args, **kwargs)
 
     def request_setter(self, request, *args, **kwargs):
@@ -32,10 +30,6 @@ class TelegraphEditRoute(Route):
         else:
             self.set_url(f'{self._THIRD_PARTY_APP_URL_TELEGRAPH}{self.get_path()}')
 
-        # self.set_cookie(cookie={
-            # 'tph_uuid': uuid.uuid4().hex,
-            # 'tph_token': '56788ccd20c21c7b4502a47c5171636e84457125f2822b6d7cf50a85e563'
-        # })
         self.set_headers({
             'Origin': 'https://telegra.ph',
             'Referer': 'https://telegra.ph/',

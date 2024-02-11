@@ -5,8 +5,12 @@ Django==4.2.7
 django-cors-headers==4.3.1
 djangorestframework==3.14.0
 idna==3.6
+psycopg==3.1.18
+psycopg2==2.9.9
 python-dotenv==1.0.0
 pytz==2023.3.post1
 requests==2.31.0
 sqlparse==0.4.4
+tzdata==2023.4
 urllib3==2.1.0
+

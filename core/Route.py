@@ -1,7 +1,6 @@
 import inspect
 import requests
 from requests import JSONDecodeError
-from .Logger import Logger
 from .settings import APP_ID, THIRD_PARTY_APP_URL, LOCALHOST, BASE_URI
 from .Methods import Methods
 
@@ -19,7 +18,6 @@ class Route(Methods):
         self._status_code: int | None = None
         self._not_allowed_headers = ('Connection', 'Keep-Alive', "Content-Length", "Transfer-Encoding", "Content-Encoding")
 
-        self._logger = Logger()
         if need_execute_local:
             request = requests.Request(
                 method=self.get_method(),
@@ -39,39 +37,16 @@ class Route(Methods):
         self._bot_id = kwargs.get("bot_id")
         self.__request_headers = dict(request.headers)
         self.__request_headers["Content-Type"] = "application/json"
-        request.headers = self.__request_headers
-        self._logger.set_proxy_method(request.method)
-        try:
-            self._logger.set_proxy_url(request.build_absolute_uri())
-        except Exception as ex:
-            self._logger.set_proxy_url(f"{LOCALHOST}{BASE_URI}{self.get_path()}")
-        self._logger.set_proxy_request_headers(dict(request.headers))
-        if self.get_method() == "GET":
-            self._logger.set_proxy_request_body(dict(request.query_params))
-        else:
-            self._logger.set_proxy_request_body(request.data)
         super().request_setter(request)
-
-    def response_core_setter(self, response, headers, status_code):
-        self._logger.set_core_response_headers(headers)
-        self._logger.set_core_response_body(response)
-        self._logger.set_core_response_status_code(status_code)
-
-    def response_proxy_setter(self, response, headers, status_code):
-        self._logger.set_proxy_response_body(response)
-        self._logger.set_proxy_response_headers(headers)
-        self._logger.set_proxy_response_status_code(status_code)
 
     def set_method(self, method: str) -> None:
         self._method = method
-        self._logger.set_core_method(method)
 
     def get_method(self) -> str:
         return self._method
 
     def set_url(self, url: str) -> None:
         self._url = url
-        self._logger.set_core_url(url)
 
     def get_url(self) -> str:
         return self._url
@@ -80,14 +55,12 @@ class Route(Methods):
         if "Host" in headers.keys():
             headers.pop("Host")
         self._headers = headers
-        self._logger.set_core_request_headers(headers)
 
     def get_headers(self) -> dict:
         return self._headers
 
     def set_request(self, data: dict) -> None:
         self._request = data
-        self._logger.set_core_request_body(data)
 
     def get_request(self) -> dict:
         return self._request
@@ -102,7 +75,6 @@ class Route(Methods):
         self._response = response
         self._headers = headers
         self._status_code = status_code
-        self.response_proxy_setter(response, headers, status_code)
 
     def get_response(self) -> dict | None:
         return self._response
@@ -130,8 +102,6 @@ class Route(Methods):
             response_headers = dict(response.headers)
             response_status_code = response.status_code
 
-        self.response_core_setter(response_body, response_headers, response_status_code)
-
         #  filtered headers
         response_headers = {k: v for k, v in response_headers.items() if k not in self._not_allowed_headers}
         response_headers.update({
@@ -141,8 +111,6 @@ class Route(Methods):
         })
 
         self.set_response(response_body, response_headers, response_status_code)
-
-        self._logger.write()
 
         return self.get_response(), self.get_headers(), self._status_code
 

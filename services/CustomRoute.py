@@ -51,8 +51,6 @@ class TelegraphEditRoute(Route):
             response_headers = dict(response.headers)
             response_status_code = response.status_code
 
-        self.response_core_setter(response_body, response_headers, response_status_code)
-
         #  filtered headers
         response_headers = {k: v for k, v in response_headers.items() if k not in self._not_allowed_headers}
         response_headers.update({
@@ -62,7 +60,5 @@ class TelegraphEditRoute(Route):
         })
 
         self.set_response(response_body, response_headers, response_status_code)
-
-        self._logger.write()
 
         return self.get_response(), self.get_headers(), self._status_code

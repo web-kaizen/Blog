@@ -1,5 +1,4 @@
 import requests
-import uuid
 
 from core.Route import Route
 from core.settings import THIRD_PARTY_APP_URL_TELEGRAPH

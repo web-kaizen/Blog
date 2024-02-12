@@ -22,6 +22,7 @@ from services.base import MessageBase, DialogueBase, DialogueIdBase
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("index/", TelegraphIndex.TelegraphIndex.as_view()),
     path("api/v0/users/", Register.Register().as_view()),
     path("api/v0/users/login/", Login.Login().as_view()),
     path("api/v0/users/logout/", Logout.Logout().as_view()),
@@ -34,5 +35,5 @@ urlpatterns = [
     path("api/v0/dialogues/<int:dialogue_id>/", DialogueIdBase.DialogueIdBase().as_view()),
     path("api/v0/dialogues/<int:dialogue_id>/messages/", MessageBase.MessageBase.as_view()),
     path("api/v0/telegraph/check/", TelegraphCheck.TelegraphCheck.as_view()),
-    path("api/v0/telegraph/index/", TelegraphIndex.TelegraphIndex.as_view()),
+    path("api/v0/telegraph/upload/", TelegraphUpload.TelegraphUpload.as_view()),
 ]

@@ -160,10 +160,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 
-STATIC_URL = '/front/assets/'
+STATIC_URL = 'front/assets/'
 
 STATICFILES_DIRS = [
-   os.path.join(BASE_DIR, "static"),
+   os.path.join(BASE_DIR, STATIC_URL),
 ]
 
 CORS_ALLOWED_ORIGINS = env["CORS_ALLOWED_ORIGINS"].split(", ")

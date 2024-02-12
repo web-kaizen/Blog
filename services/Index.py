@@ -4,7 +4,7 @@ from django.views import View
 from core.Route import Route
 
 
-class TelegraphIndex(Route, View):
+class Index(Route, View):
     def get_method(self) -> str:
         return "GET"
 

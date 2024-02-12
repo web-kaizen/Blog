@@ -1,11 +1,11 @@
-from core.Route import Route
 from rest_framework.views import APIView
 
+from services.CustomRoute import TelegraphEditRoute
 
-class EmailVerificationResend(Route, APIView):
 
+class ApiCheck(TelegraphEditRoute, APIView):
     def get_method(self) -> str:
         return "POST"
 
     def get_path(self) -> str:
-        return f"/users/email-verification/resend"
+        return "/check/"

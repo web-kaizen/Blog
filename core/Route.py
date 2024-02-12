@@ -1,13 +1,14 @@
-import inspect
 import requests
 from requests import JSONDecodeError
-from core.settings import TELEGRAPH_URL
+from core.settings import TELEGRAPH_URL, TELEGRAPH_EDIT_URL
 from core.Methods import Methods
 
 
 class Route(Methods):
-    def __init__(self, need_execute_local=False, *args, **kwargs):
-        self._THIRD_PARTY_APP_URL = TELEGRAPH_URL
+    def __init__(self, *args, **kwargs):
+        # self._THIRD_PARTY_APP_URL = TELEGRAPH_URL
+        self.TELEGRAPH_URL = TELEGRAPH_URL
+        self.TELEGRAPH_EDIT_URL = TELEGRAPH_EDIT_URL
         self._method: str | None = None
         self._request: dict | None = None
         self._response: dict | None = None
@@ -17,23 +18,7 @@ class Route(Methods):
         self._status_code: int | None = None
         self._not_allowed_headers = ('Connection', 'Keep-Alive', "Content-Length", "Transfer-Encoding", "Content-Encoding")
 
-        if need_execute_local:
-            request = requests.Request(
-                method=self.get_method(),
-                url=f"{self._THIRD_PARTY_APP_URL}{self.get_path()}",
-            )
-            other_params: list = ["data", "query_params", "json", "headers"]
-            for param in other_params:
-                if param in inspect.signature(self.__init__).parameters:
-                    setattr(request, param, getattr(self, param))
-                else:
-                    setattr(request, param, {})
-
-            getattr(self, self.get_method().lower())(request)
-
     def request_setter(self, request, *args, **kwargs):
-        self._dialogue_id = kwargs.get("dialogue_id")
-        self._bot_id = kwargs.get("bot_id")
         self.__request_headers = dict(request.headers)
         self.__request_headers["Content-Type"] = "application/json"
         super().request_setter(request)

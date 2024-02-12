@@ -1,14 +1,9 @@
 import requests
 
 from core.Route import Route
-from core.settings import TELEGRAPH_URL, TELEGRAPH_EDIT_URL
 
 
 class TelegraphEditRoute(Route):
-    def __init__(self, need_execute_local=False, *args, **kwargs):
-        self.TELEGRAPH_EDIT_URL = TELEGRAPH_EDIT_URL
-        super().__init__(self, *args, **kwargs)
-
     def request_setter(self, request, *args, **kwargs):
         self.set_method(self.get_method())
         if self.get_method() == "GET" and request.query_params:
@@ -54,10 +49,6 @@ class TelegraphEditRoute(Route):
 
 
 class TelegraphUploadRoute(Route):
-    def __init__(self, need_execute_local=False, *args, **kwargs):
-        self.TELEGRAPH_URL = TELEGRAPH_URL
-        super().__init__(self, *args, **kwargs)
-
     def request_setter(self, request, *args, **kwargs):
         self.set_method(self.get_method())
         if self.get_method() == "GET" and request.query_params:

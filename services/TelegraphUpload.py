@@ -1,11 +1,11 @@
 from rest_framework.views import APIView
 
-from services.CustomRoute import TelegraphEditRoute
+from services.CustomRoute import TelegraphUploadRoute
 
 
-class TelegraphUpload(TelegraphEditRoute, APIView):
+class TelegraphUpload(TelegraphUploadRoute, APIView):
     def get_method(self) -> str:
-        return 'POST'
+        return "POST"
 
     def get_path(self) -> str:
-        return '/upload'
+        return "/upload"

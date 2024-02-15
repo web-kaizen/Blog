@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
-from services import ApiCheck, Index, ApiUpload
+from services import ApiCheck, Index, ApiUpload, ApiSave
 from django.urls import path
 from django.contrib import admin
 
@@ -24,4 +24,5 @@ urlpatterns = [
     path("index/", Index.Index.as_view()),
     path("api/v0/check/", ApiCheck.ApiCheck.as_view()),
     path("api/v0/upload/", ApiUpload.ApiUpload.as_view()),
+    path("api/v0/save/", ApiSave.ApiSave.as_view()),
 ]

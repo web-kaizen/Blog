@@ -14,6 +14,7 @@ class Methods:
             print(self.get_url())
 
         self.set_headers(dict(request.headers))
+        print(self.get_headers())
         self.set_request(request.data)
 
     def get(self, request, *args, **kwargs):

@@ -412,12 +412,12 @@ body.mobile .button_hover {
 }
 
 .buttons button:after,.buttons button:before,.tl_blocks .buttons button {
-    background: url(../images/icons.png) -8px 26px no-repeat /*change file name from icons.png?1*/
+    background: url(https://telegra.ph/images/icons.png?1) -8px 26px no-repeat
 }
 
 @media (-webkit-min-device-pixel-ratio: 2),(min-resolution:192dpi) {
     .buttons button:after,.buttons button:before,.tl_blocks .buttons button {
-        background-image:url(/images/icons_2x.png?1);
+        background-image:url(https://telegra.ph/images/icons_2x.png?1);
         background-size: 40px 487px
     }
 }
@@ -985,7 +985,7 @@ body.mobile .button_hover {
 .tl_article.tl_article_edit figcaption[data-placeholder].empty .editable_input {
     text-align: left;
     position: absolute;
-    width: 1px
+    /*width: 1px*/
 }
 
 .account {

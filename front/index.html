@@ -1,14 +1,15 @@
 {% load static %}
+<!DOCTYPE html>
 <html>
-<head>
+  <head>
     <meta charset="utf-8">
     <title>Telegraph</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="format-detection" content="telephone=no">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="MobileOptimized" content="176">
-    <meta name="HandheldFriendly" content="True">
-    <meta name="robots" content="index, follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="MobileOptimized" content="176" />
+    <meta name="HandheldFriendly" content="True" />
+    <meta name="robots" content="index, follow" />
     <meta property="og:title" content="Telegraph">
     <meta property="og:description" content="Telegra.ph is a minimalist publishing tool that allows you to create richly formatted posts and push them to the Web in just a click. Telegraph posts also get beautiful Instant View pages on Telegram.">
     <meta property="og:image" content="https://telegra.ph/images/logo.png">
@@ -23,10 +24,10 @@
     <link href="{% static 'css/quill.core.min.css' %}" rel="stylesheet">
     <link href="{% static 'css/core.min.css' %}" rel="stylesheet">
   </head>
-<body cz-shortcut-listen="true">
+  <body>
     <div class="tl_page_wrap">
       <div class="tl_page">
-        <main class="tl_article tl_article_editable tl_article_edit title_focused">
+        <main class="tl_article">
           <header class="tl_article_header" dir="auto">
             <h1></h1>
             <address>
@@ -34,7 +35,9 @@
            --><time datetime=""></time>
             </address>
           </header>
-          <article id="_tl_editor" class="tl_article_content ql-container"><div class="ql-editor" contenteditable="true"><h1 dir="auto" data-placeholder="Title" data-label="Title" class="empty"><br></h1><address dir="auto" data-placeholder="Your name" data-label="Author" class="empty"><br></address><p dir="auto" data-placeholder="Your story..." class="empty"><br></p></div><div class="ql-clipboard" contenteditable="true" tabindex="-1"></div><div id="_tl_link_tooltip" class="tl_link_tooltip"></div><div id="_tl_tooltip" class="tl_tooltip">
+          <article id="_tl_editor" class="tl_article_content"><h1><br></h1><address><br></address><p><br></p></article>
+          <div id="_tl_link_tooltip" class="tl_link_tooltip"></div>
+          <div id="_tl_tooltip" class="tl_tooltip">
             <div class="buttons">
               <span class="button_hover"></span>
               <span class="button_group"><!--
@@ -50,17 +53,15 @@
             </div>
             <div class="prompt">
               <span class="close"></span>
-              <div class="prompt_input_wrap"><input type="url" class="prompt_input"></div>
+              <div class="prompt_input_wrap"><input type="url" class="prompt_input" /></div>
             </div>
-          </div><div id="_tl_blocks" class="tl_blocks" style="top: 60px;">
+          </div>
+          <div id="_tl_blocks" class="tl_blocks">
             <div class="buttons">
               <button id="_image_button"></button><!--
            --><button id="_embed_button"></button>
             </div>
-          </div><input type="file" accept="image/gif, image/jpeg, image/jpg, image/png, video/mp4" class="ql-image" data-status="busy"><input type="file" accept="image/gif, image/jpeg, image/jpg, image/png, video/mp4" class="ql-image" data-status="busy"><input type="file" accept="image/gif, image/jpeg, image/jpg, image/png, video/mp4" class="ql-image" data-status="busy"></article>
-          
-          
-          
+          </div>
           <aside class="tl_article_buttons">
             <div class="account account_top"></div>
             <button id="_edit_button" class="button edit_button">Edit</button><!--
@@ -70,12 +71,12 @@
           </aside>
         </main>
       </div>
-      
+
     </div>
-    
-    
+
+
     <script>var T={"apiUrl":"http:\/\/127.0.0.1:8000","datetime":0,"pageId":0,"editable":true};(function(){var b=document.querySelector('time');if(b&&T.datetime){var a=new Date(1E3*T.datetime),d='January February March April May June July August September October November December'.split(' ')[a.getMonth()],c=a.getDate();b.innerText=d+' '+(10>c?'0':'')+c+', '+a.getFullYear()}})();</script>
-    
+
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'js/jquery.selection.min.js' %}"></script>
     <script src="{% static 'js/autosize.min.js' %}"></script>
@@ -83,6 +84,5 @@
     <script src="{% static 'js/quill.min.js' %}"></script>
     <script src="{% static 'js/core.min.js' %}"></script>
     <script async="" src="https://t.me/_websync_?path=&amp;hash=7cd70de4f50621c86a"></script>
-  
-</body>
+  </body>
 </html>

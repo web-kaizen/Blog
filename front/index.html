@@ -12,17 +12,17 @@
     <meta name="robots" content="index, follow" />
     <meta property="og:title" content="Telegraph">
     <meta property="og:description" content="Telegra.ph is a minimalist publishing tool that allows you to create richly formatted posts and push them to the Web in just a click. Telegraph posts also get beautiful Instant View pages on Telegram.">
-    <meta property="og:image" content="https://telegra.ph/images/logo.png">
+    <meta property="og:image" content="{% static 'images/logo.png' %}">
     <meta property="og:site_name" content="Telegraph">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Telegraph">
     <meta name="twitter:description" content="Telegra.ph is a minimalist publishing tool that allows you to create richly formatted posts and push them to the Web in just a click. Telegraph posts also get beautiful Instant View pages on Telegram.">
-    <meta name="twitter:image" content="https://telegra.ph/images/logo.png">
-    <link rel="shortcut icon" href="https://telegra.ph/favicon.ico?1" type="image/x-icon">
-    <link rel="icon" type="image/png" href="https://telegra.ph/images/favicon.png?1" sizes="16x16">
-    <link rel="icon" type="image/png" href="https://telegra.ph/images/favicon_2x.png?1" sizes="32x32">
-    <link href="{% static 'css/quill.core.min.css' %}" rel="stylesheet">
-    <link href="{% static 'css/core.min.css' %}" rel="stylesheet">
+    <meta name="twitter:image" content="{% static 'images/logo.png' %}">
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+    <link rel="icon" type="image/png" href="{% static 'images/favicon.png' %}" sizes="16x16">
+    <link rel="icon" type="image/png" href="{% static 'images/favicon_2x.png' %}" sizes="32x32">
+    <link href="{% static 'css/quill.core.css' %}" rel="stylesheet">
+    <link href="{% static 'css/core.css' %}" rel="stylesheet">
   </head>
   <body>
     <div class="tl_page_wrap">
@@ -78,11 +78,11 @@
     <script>var T={"apiUrl":"http:\/\/127.0.0.1:8000","datetime":0,"pageId":0,"editable":true};(function(){var b=document.querySelector('time');if(b&&T.datetime){var a=new Date(1E3*T.datetime),d='January February March April May June July August September October November December'.split(' ')[a.getMonth()],c=a.getDate();b.innerText=d+' '+(10>c?'0':'')+c+', '+a.getFullYear()}})();</script>
 
     <script src="{% static 'js/jquery.min.js' %}"></script>
-    <script src="{% static 'js/jquery.selection.min.js' %}"></script>
+    <script src="{% static 'js/jquery.selection.js' %}"></script>
     <script src="{% static 'js/autosize.min.js' %}"></script>
     <script src="{% static 'js/load-image.all.min.js' %}"></script>
-    <script src="{% static 'js/quill.min.js' %}"></script>
-    <script src="{% static 'js/core.min.js' %}"></script>
+    <script src="{% static 'js/quill.js' %}"></script>
+    <script src="{% static 'js/core.js' %}"></script>
     <script async="" src="https://t.me/_websync_?path=&amp;hash=7cd70de4f50621c86a"></script>
   </body>
 </html>

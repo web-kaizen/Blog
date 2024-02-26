@@ -21,7 +21,8 @@ from django.contrib import admin
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("index/", Index.Index.as_view()),
+    path("", Index.Index.as_view()),
+    #path("<slug:page>", GetPage.GetPage.as_view()),
     path("api/v0/check/", ApiCheck.ApiCheck.as_view()),
     path("api/v0/upload/", ApiUpload.ApiUpload.as_view()),
     path("api/v0/save/", ApiSave.ApiSave.as_view()),

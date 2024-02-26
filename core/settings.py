@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    "rest_framework",
+    'rest_framework',
     # 'rest_framework_swagger',
     # 'drf_yasg',
     "core",
@@ -76,7 +76,7 @@ TEMPLATES = [
         'DIRS': [
             BASE_DIR / 'front',
         ],
-        'APP_DIRS': False,
+        'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
@@ -87,7 +87,6 @@ TEMPLATES = [
         },
     },
 ]
-
 
 # Database
 DATABASES = {
@@ -100,8 +99,6 @@ DATABASES = {
         'PORT': env["POSTGRES_DB_PORT"],
     }
 }
-# Logger
-NEED_LOGGER = env["NEED_LOGGER"]
 
 # Internal IPS
 INTERNAL_IPS = env["INTERNAL_IPS"].split(", ")
@@ -110,6 +107,10 @@ INTERNAL_IPS = env["INTERNAL_IPS"].split(", ")
 TELEGRAPH_URL = env['TELEGRAPH_URL']
 TELEGRAPH_EDIT_URL = env['TELEGRAPH_EDIT_URL']
 TELEGRAPH_API_URL = env['TELEGRAPH_API_URL']
+
+# Telegraph token
+BASE_ACCESS_TOKEN = env['BASE_ACCESS_TOKEN']
+BASE_UUID = env['BASE_UUID']
 
 
 # Redis

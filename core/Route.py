@@ -1,12 +1,11 @@
 import requests
 from requests import JSONDecodeError
-from core.settings import TELEGRAPH_URL, TELEGRAPH_EDIT_URL, TELEGRAPH_API_URL
+from core.settings import TELEGRAPH_URL, TELEGRAPH_EDIT_URL, TELEGRAPH_API_URL, BASE_ACCESS_TOKEN, BASE_UUID
 from core.Methods import Methods
 
 
 class Route(Methods):
     def __init__(self, *args, **kwargs):
-        # self._THIRD_PARTY_APP_URL = TELEGRAPH_URL
         self.TELEGRAPH_URL = TELEGRAPH_URL
         self.TELEGRAPH_EDIT_URL = TELEGRAPH_EDIT_URL
         self.TELEGRAPH_API_URL = TELEGRAPH_API_URL
@@ -48,8 +47,8 @@ class Route(Methods):
 
     def set_cookies(self) -> None:
         self._request_cookies = {
-            'tph_uuid': 'dteEx0DCjCkQfXapBJHLyWPfyzh8ruzEWLhtJU32wn',
-            'tph_token': 'a00835f8ffba511c9a71c2397c33fac4229a782cca04754026b90f0b1316',
+            'tph_uuid': BASE_UUID,
+            'tph_token': BASE_ACCESS_TOKEN,
         }
 
     def get_cookies(self) -> dict:

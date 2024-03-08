@@ -113,8 +113,11 @@ class TelegraphSaveRoute(Route):
         proxy_request_headers['Origin'] = 'https://telegra.ph'
         proxy_request_headers['Referer'] = 'https://telegra.ph/'
 
+        proxy_request_body = dict(request.data)
+        proxy_request_body['access_token'] = 'a7f92b75dbac779abec024cb7d8418e899be7c55ba53e5139678e785a3cd'
+
         self.set_headers(proxy_request_headers)
-        self.set_request(request.data)
+        self.set_request(proxy_request_body)
 
     def array_to_str(self, value: list):
         return ''.join(value)
@@ -127,7 +130,6 @@ class TelegraphSaveRoute(Route):
         self._request_data = data
 
     def send(self) -> tuple:
-        print(self.get_request())
         response = requests.request(
             method=self.get_method(),
             url=self.get_url(),
@@ -136,7 +138,6 @@ class TelegraphSaveRoute(Route):
         )
         try:
             response_body = response.json()
-            print(response_body)
             response_body['result']['url'] = '{localhost}/{path}'.format(localhost=LOCALHOST, path=response_body['result']['path'])
         except requests.JSONDecodeError as ex:
             response_body = response.text if response.text else None
